@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum Sensor
 {
@@ -20,11 +21,17 @@ public class HardwareManager : MonoBehaviour
 
     public static HardwareManager Instance { get; private set; }
 
-    public Hardware[] HardwareObjects { get => hardwareObjects; }
+    [HideInInspector]
+    public UnityEvent<Hardware> TrackerConnected;
+    [HideInInspector]
+    public UnityEvent<Hardware> TrackerDisconnected;
 
-    [SerializeField] private int port = 7777;
+    public Dictionary<int, Hardware> HardwareObjects { get => hardwareObjects; }
+
+    [SerializeField] private int port = 8888;
     [Space]
-    [SerializeField] private Hardware[] hardwareObjects;
+    [SerializeField] private Dictionary<int, Hardware> hardwareObjects = new Dictionary<int, Hardware>();
+    [SerializeField] private GameObject hardwarePrefab;
 
     private Socket socket;
     private Queue<string> data = new Queue<string>();
@@ -40,6 +47,12 @@ public class HardwareManager : MonoBehaviour
     {
         Initialize();
         Task.Run(ReceiveData);
+
+        TrackerDisconnected.AddListener((hardware) =>
+        {
+            hardwareObjects.Remove(hardware.ID);
+        });
+
     }
 
     void OnDisable()
@@ -55,17 +68,23 @@ public class HardwareManager : MonoBehaviour
     {
         while (data.Count > 0)
         {
+            //Debug.Log("Parsing data.");
             string message = data.Dequeue();
+            Debug.Log(message);
             string[] packet = message.Split(',');
             int id = int.Parse(packet[0]);
             float gyroX = float.Parse(packet[1]);
             float gyroY = float.Parse(packet[2]);
             float gyroZ = float.Parse(packet[3]);
-            float accX = float.Parse(packet[4]);
-            float accY = float.Parse(packet[5]);
-            float accZ = float.Parse(packet[6]);
+
+            if (!hardwareObjects.ContainsKey(id))
+            {
+                Hardware hardware = Instantiate(hardwarePrefab).GetComponent<Hardware>();
+                hardware.Init(id);
+                hardwareObjects[id] = hardware;
+            }
+
             hardwareObjects[id].ReceiveGyro(gyroX, gyroY, gyroZ);
-            hardwareObjects[id].ReceiveAccel(accX, accY, accZ);
         }
     }
 
@@ -76,6 +95,7 @@ public class HardwareManager : MonoBehaviour
         socket.ReceiveBufferSize = 1024;
         socket.Bind(ep);
         isRunning = true;
+        Debug.Log("Initialized.");
     }
 
     public async void ReceiveData()
@@ -91,11 +111,11 @@ public class HardwareManager : MonoBehaviour
             }
             catch (ObjectDisposedException)
             {
-                Debug.Log("Socket has been closed");
+                //Debug.Log("Socket has been closed");
             }
             catch (System.Exception e)
             {
-                Debug.LogError(e);
+                //Debug.LogError(e);
             }
         }
     }
