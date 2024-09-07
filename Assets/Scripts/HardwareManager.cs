@@ -44,8 +44,9 @@ public class HardwareManager : MonoBehaviour
 
     void Update()
     {
-        if (data.TryDequeue(out string message))
+        while (data.Count > 0)
         {
+            string message = data.Dequeue();
             string[] packet = message.Split(',');
             int id = int.Parse(packet[0]);
             float gyroX = float.Parse(packet[1]);
