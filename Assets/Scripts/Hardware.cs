@@ -17,7 +17,7 @@ public class Hardware : MonoBehaviour
     private bool calibratedGyro;
     private float lastCommTime;
 
-    
+
     private float hardwareTimeout = 3f;
 
     public void Init(int id)
@@ -39,17 +39,19 @@ public class Hardware : MonoBehaviour
     public void ReceiveGyro(float x, float y, float z)
     {
         Vector3 gyro = new Vector3(x, -z, -y);
-        if(calibratedGyro)
+        if (calibratedGyro)
         {
             transform.Rotate((gyro - (calibratedGyroPosition)) * (1f / 119f));
-        } else
+        }
+        else
         {
-            if(calibratedPositions == 100)
+            if (calibratedPositions == 100)
             {
                 calibratedPositions = 0;
                 calibratedGyro = true;
                 calibratedGyroPosition /= 100;
-            } else
+            }
+            else
             {
                 calibratedGyroPosition += gyro;
                 calibratedPositions++;
@@ -59,7 +61,7 @@ public class Hardware : MonoBehaviour
 
         // I'm sorry
         // Max value
-        if(Direction.x > MaxValues.x)
+        if (Direction.x > MaxValues.x)
         {
             MaxValues = new Vector3(Direction.x, MaxValues.y, MaxValues.z);
         }
