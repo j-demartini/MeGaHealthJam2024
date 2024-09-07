@@ -43,10 +43,6 @@ MonoBehaviour:
   includeSunInBaking:
     m_OverrideState: 0
     m_Value: 0
-  m_SkyVersion: 1
-  m_ObsoleteEarthPreset:
-    m_OverrideState: 0
-    m_Value: 1
   type:
     m_OverrideState: 0
     m_Value: 1
@@ -55,8 +51,12 @@ MonoBehaviour:
     m_Value: 0
   material:
     m_OverrideState: 0
+<<<<<<< HEAD
     m_Value: {fileID: -876546973899608171, guid: 02532cbb810fb404db49da84f1efe41e,
       type: 3}
+=======
+    m_Value: {fileID: 0}
+>>>>>>> d769ebe0719d97c442298bf2425338de5dcf16a9
   sphericalMode:
     m_OverrideState: 0
     m_Value: 1
@@ -141,6 +141,7 @@ MonoBehaviour:
   numberOfBounces:
     m_OverrideState: 0
     m_Value: 8
+<<<<<<< HEAD
 --- !u!114 &-4630222059276606193
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -460,6 +461,12 @@ MonoBehaviour:
   shadowOpacityFallback:
     m_OverrideState: 0
     m_Value: 0
+=======
+  m_SkyVersion: 1
+  m_ObsoleteEarthPreset:
+    m_OverrideState: 0
+    m_Value: 1
+>>>>>>> d769ebe0719d97c442298bf2425338de5dcf16a9
 --- !u!114 &-4151792930034644520
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -507,8 +514,13 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 50
   meanFreePath:
+<<<<<<< HEAD
     m_OverrideState: 1
     m_Value: 75
+=======
+    m_OverrideState: 0
+    m_Value: 400
+>>>>>>> d769ebe0719d97c442298bf2425338de5dcf16a9
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
@@ -589,11 +601,19 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   windOrientation:
+<<<<<<< HEAD
     m_OverrideState: 1
     m_Value: 0
   windSpeed:
     m_OverrideState: 1
     m_Value: 200
+=======
+    m_OverrideState: 0
+    m_Value: 0
+  windSpeed:
+    m_OverrideState: 0
+    m_Value: 0
+>>>>>>> d769ebe0719d97c442298bf2425338de5dcf16a9
   fogType:
     m_OverrideState: 1
     m_Value: 0
