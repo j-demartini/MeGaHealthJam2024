@@ -9,6 +9,8 @@ public class Hardware : MonoBehaviour
     public Vector3 MinValues { get; set; }
 
     public Vector3 Direction { get; set; }
+    public Vector3 Sum { get; set; }
+
     public int ID { get; private set; }
 
     // Calibration
@@ -41,7 +43,8 @@ public class Hardware : MonoBehaviour
         Vector3 gyro = new Vector3(x, -z, -y);
         if (calibratedGyro)
         {
-            transform.Rotate((gyro - (calibratedGyroPosition)) * (1f / 119f));
+            Sum += (gyro - (calibratedGyroPosition)) * (1f / 119f);
+            //transform.Rotate((gyro - (calibratedGyroPosition)) * (1f / 119f));
         }
         else
         {
