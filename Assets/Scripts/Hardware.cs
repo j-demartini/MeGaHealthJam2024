@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hardware : MonoBehaviour
 {
-
+    public Vector3 Direction { get; private set; }
     public float f;
 
     private Vector3 calibratedGyroPosition;

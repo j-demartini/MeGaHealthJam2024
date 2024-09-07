@@ -7,13 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+public enum Sensor
+{
+    LeftWheel = 0,
+    RightWheel = 1,
+    LeftLeg = 2,
+    RightLeg = 3,
+}
+
 public class HardwareManager : MonoBehaviour
 {
 
     public static HardwareManager Instance { get; private set; }
 
+    public Hardware[] HardwareObjects { get => hardwareObjects; }
+
     [SerializeField] private int port = 7777;
-    [SerializeField] private int receivePerSecond = 30;
     [Space]
     [SerializeField] private Hardware[] hardwareObjects;
 
