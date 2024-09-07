@@ -13,6 +13,14 @@ public class MetricManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            NotificationManager.Instance.CreateNotification("New Device Connected", "Leg tracker ID:0 has been identified.", 2.5f);
+        }
+    }
+
 
 
 }
