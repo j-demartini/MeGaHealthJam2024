@@ -13,6 +13,7 @@ public class HardwareManager : MonoBehaviour
     public static HardwareManager Instance { get; private set; }
 
     [SerializeField] private int port = 7777;
+    [SerializeField] private int receivePerSecond = 30;
     [Space]
     [SerializeField] private Hardware[] hardwareObjects;
 
