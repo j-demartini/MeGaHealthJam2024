@@ -9,10 +9,12 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    [Header("Connection")]
     [SerializeField] private Transform connectionMenu;
     [SerializeField] private TextAffector connectionTitle;
     [SerializeField] private TextAffector connectedDevices;
     [SerializeField] private TextAffector pressStart;
+    [Header("Calibration")]
     [SerializeField] private Transform calibrationMenu;
     [SerializeField] private TextAffector textAffectorTitle;
     [SerializeField] private TextAffector calibrationMessage;
