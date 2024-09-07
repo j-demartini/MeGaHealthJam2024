@@ -292,9 +292,9 @@ RectTransform:
   - {fileID: 1220639443}
   m_Father: {fileID: 1801343432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 275, y: -300}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &245172273
@@ -1413,7 +1413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &750119274
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1916,6 +1916,7 @@ MonoBehaviour:
   port: 8888
   hardwarePrefab: {fileID: 4938363559628015985, guid: 4c837f3f99a55e740863d73e0364e5b4,
     type: 3}
+  hardwareParent: {fileID: 0}
 --- !u!1 &892522825
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,7 +2141,7 @@ GameObject:
   - component: {fileID: 1059127650}
   - component: {fileID: 1059127649}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2178,6 +2179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13906dbac4e681c48af834793248edf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackerID: 0
+  leg: {fileID: 1204038468}
 --- !u!114 &1059127650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2477,9 +2480,9 @@ RectTransform:
   - {fileID: 2046503075}
   m_Father: {fileID: 1801343432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1725, y: -300}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1200903751
@@ -2509,7 +2512,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1204038468}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: LegIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

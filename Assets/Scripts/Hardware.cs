@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Hardware : MonoBehaviour
@@ -7,6 +8,8 @@ public class Hardware : MonoBehaviour
     // Maximums
     public Vector3 MaxValues { get; set; }
     public Vector3 MinValues { get; set; }
+    public float MaxSum { get; set; }
+    public float MinSum { get; set; }
 
     public Vector3 Direction { get; set; }
     public Vector3 Sum { get; set; }
@@ -44,7 +47,17 @@ public class Hardware : MonoBehaviour
         if (calibratedGyro)
         {
             Sum += (gyro - (calibratedGyroPosition)) * (1f / 119f);
-            //transform.Rotate((gyro - (calibratedGyroPosition)) * (1f / 119f));
+
+            if(Sum.y > MaxSum)
+            {
+                MaxSum = Sum.y;
+            }
+            
+            if(Sum.y < MinSum)
+            {
+                MinSum = Sum.y;
+            }
+
         }
         else
         {
@@ -102,4 +115,40 @@ public class Hardware : MonoBehaviour
         //transform.rotation = Quaternion.Euler(Pitch, 0, Roll);
         lastCommTime = Time.realtimeSinceStartup;
     }
+
+    public float GetDirectionValue(Axis axis, AlliedPowers powers = AlliedPowers.AMERICA, AxisPowers powers2 = AxisPowers.JAPAN)
+    {
+        switch (axis)
+        {
+            case Axis.X:
+                return Direction.x / MaxValues.x;
+            case Axis.Y:
+                return Direction.y / MaxValues.y;
+            case Axis.Z:
+                return Direction.z / MaxValues.z;
+        }
+
+        return 0;
+    }
+
+    public float GetSumValue()
+    {
+        return Sum.y / MaxSum;
+    }
+
+}
+
+public enum Axis
+{
+    X,Y,Z
+}
+
+public enum AlliedPowers
+{ 
+    AMERICA, UK, EUROPE
+}
+
+public enum AxisPowers
+{
+    JAPAN, GERMANY, ITALY
 }
