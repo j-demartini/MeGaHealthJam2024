@@ -8,7 +8,7 @@ public class Hardware : MonoBehaviour
     public Vector3 MaxValues { get; set; }
     public Vector3 MinValues { get; set; }
 
-    public Vector3 Direction { get; private set; }
+    public Vector3 Direction { get; set; }
     public int ID { get; private set; }
 
     // Calibration
