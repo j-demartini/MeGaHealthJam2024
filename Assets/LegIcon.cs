@@ -15,7 +15,7 @@ public class LegIcon : MonoBehaviour
         if (HardwareManager.Instance.HardwareObjects.ContainsKey(trackerID))
         {
             Hardware h = HardwareManager.Instance.HardwareObjects[trackerID];
-            icon.Rotate(new Vector3(0, 0, h.Direction.y));
+            leg.localRotation = Quaternion.Euler(0, 0, 3);
             minValue.SetText(h.MinValues.y.ToString("0.0"));
             maxValue.SetText(h.MaxValues.y.ToString("0.0"));
             meter.anchoredPosition = new Vector2(h.Direction.y / h.MaxValues.y * 165f, 0);
