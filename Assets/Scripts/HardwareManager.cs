@@ -12,8 +12,7 @@ public enum Sensor
 {
     LeftWheel = 0,
     RightWheel = 1,
-    LeftLeg = 2,
-    RightLeg = 3,
+    Leg = 2
 }
 
 public class HardwareManager : MonoBehaviour
@@ -32,6 +31,7 @@ public class HardwareManager : MonoBehaviour
     [Space]
     [SerializeField] private Dictionary<int, Hardware> hardwareObjects = new Dictionary<int, Hardware>();
     [SerializeField] private GameObject hardwarePrefab;
+    [SerializeField] private Transform hardwareParent;
 
     private Socket socket;
     private Queue<string> data = new Queue<string>();
@@ -79,7 +79,7 @@ public class HardwareManager : MonoBehaviour
 
             if (!hardwareObjects.ContainsKey(id))
             {
-                Hardware hardware = Instantiate(hardwarePrefab).GetComponent<Hardware>();
+                Hardware hardware = Instantiate(hardwarePrefab, hardwareParent).GetComponent<Hardware>();
                 hardware.Init(id);
                 hardwareObjects[id] = hardware;
             }
