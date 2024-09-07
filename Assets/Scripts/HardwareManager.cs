@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -12,7 +13,6 @@ public class HardwareManager : MonoBehaviour
     public static HardwareManager Instance { get; private set; }
 
     [SerializeField] private int port = 7777;
-    [SerializeField] private int receivePerSecond = 30;
     [Space]
     [SerializeField] private Hardware[] hardwareObjects;
 
@@ -54,7 +54,7 @@ public class HardwareManager : MonoBehaviour
             float accY = float.Parse(packet[5]);
             float accZ = float.Parse(packet[6]);
             hardwareObjects[id].ReceiveGyro(gyroX, gyroY, gyroZ);
-            hardwareObjects[id].ReceiveAcced(accX, accY, accZ);
+            hardwareObjects[id].ReceiveAccel(accX, accY, accZ);
         }
     }
 
@@ -77,13 +77,15 @@ public class HardwareManager : MonoBehaviour
                 await socket.ReceiveFromAsync(buffer, SocketFlags.None, new IPEndPoint(IPAddress.Any, 0));
                 string message = Encoding.ASCII.GetString(buffer);
                 data.Enqueue(message);
-                await Task.Delay(1000 / receivePerSecond);
+            }
+            catch (ObjectDisposedException)
+            {
+                Debug.Log("Socket has been closed");
             }
             catch (System.Exception e)
             {
                 Debug.LogError(e);
             }
-
         }
     }
 
