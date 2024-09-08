@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     [Space]
     [SerializeField] private bool debug = false;
 
+    [SerializeField] private List<GameObject> hats = new List<GameObject>();
+
     [SerializeField] private AudioSource fireSource;
 
     private bool autoFire = false;
@@ -57,7 +59,7 @@ public class Player : MonoBehaviour
     {
         if (debug || !GameManager.Instance.GameStarted)
         {
-           return;
+            return;
         }
 
         if (debug)
@@ -97,6 +99,16 @@ public class Player : MonoBehaviour
             graceTimer = 0f;
             maxHitPoints += 1;
         }
+    }
+
+    public void SetColor(Color c)
+    {
+        GetComponentInChildren<MeshRenderer>().material.color = c;
+    }
+
+    public void SetHat(int hatID)
+    {
+        hats[hatID].SetActive(true);
     }
 
     private void Movement()
@@ -157,13 +169,13 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(HardwareManager.Instance.HardwareObjects.Count < 3) 
+        if (HardwareManager.Instance.HardwareObjects.Count < 3)
         {
             autoFire = true;
         }
 
 
-        cooldown += Time.deltaTime * (autoFire ? 1f :HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude);
+        cooldown += Time.deltaTime * (autoFire ? 1f : HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude);
         if ((autoFire || HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude > noiseThreshold) && cooldown >= fireRate)
         {
             cooldown = 0f;

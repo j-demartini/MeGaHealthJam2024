@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
@@ -40,6 +42,12 @@ public class Enemy : MonoBehaviour
         Move();
         if (!isDying)
             Gun();
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Die();
+        }
+
     }
 
     public virtual void Move()
@@ -91,13 +99,11 @@ public class Enemy : MonoBehaviour
     {
         // TODO: VFX
         Debug.Log("Enemy died");
+        FXManager.Instance.PlaySFX("Explosion", 1f);
         GameManager.Instance.enemiesKilled++;
         isDying = true;
-        FXManager.Instance.PlayVFX("Explosion", transform.position, explosionSize);
-        foreach (Transform spawnLoc in fireSpawnLoc)
-        {
-            FXManager.Instance.PlayVFX("Fire", spawnLoc.position, 1f);
-        }
+        FXManager.Instance.PlayVFX("Explosion", transform.position, 12.5f);
+        GetComponentInChildren<VisualEffect>().enabled = true;
         EnemyManager.Instance.SpawnedEnemies.Remove(this);
         Invoke("Delete", 10f);
     }

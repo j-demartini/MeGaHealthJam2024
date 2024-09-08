@@ -101,6 +101,7 @@ public class GarageMenu : MonoBehaviour
             if (goIndex > 2)
             {
                 // LOCK IN
+                Player.Instance.SetHat(Mathf.RoundToInt(choiceIndex));
                 GameManager.Instance.Work = true;
                 hatChosen = true;
                 FXManager.Instance.PlaySFX("UISelect", 1f);

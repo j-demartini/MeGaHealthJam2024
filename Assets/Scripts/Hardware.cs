@@ -23,7 +23,7 @@ public class Hardware : MonoBehaviour
     private float lastCommTime;
 
 
-    private float hardwareTimeout = 3f;
+    private float hardwareTimeout = 20f;
 
     public void Init(int id)
     {
@@ -133,9 +133,13 @@ public class Hardware : MonoBehaviour
 
     public float GetSumValue()
     {
-        float current = Sum.y + MinSum;
-        float max = MaxSum - MinSum;
-        return current / max;
+        if(Sum.y < 0)
+        {
+            return 0;
+        } else 
+        {
+            return Sum.y / MaxSum;
+        }
     }
 
 }
