@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     public float AimAssistStrength { get; set; }
     public GameObject AimAssistTarget { get; set; }
 
+    [SerializeField] private int damage = 1;
+
     private Rigidbody rb;
     private bool fired = false;
     private float speed;
@@ -46,12 +48,12 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy") && FiredFrom == "Player")
         {
             Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
-            enemy.TakeDamage(1);
+            enemy.TakeDamage(damage);
             Destroy(gameObject);
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Player") && FiredFrom == "Enemy")
         {
-            Player.Instance.TakeDamage(1);
+            Player.Instance.TakeDamage(damage);
             Destroy(gameObject);
         }
     }

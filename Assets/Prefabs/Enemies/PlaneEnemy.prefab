@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHitPoints: 1
   speed: 15
-  trackingSpeed: 0.5
+  trackingSpeed: 0.1
   shouldPitch: 1
   rollSpeed: 20
   bulletPrefab: {fileID: 7713721714757078567, guid: 20e099999945b5c75a3e96ad29dbecc4,

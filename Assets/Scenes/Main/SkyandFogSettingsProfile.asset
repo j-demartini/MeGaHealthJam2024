@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d877ec3e844f2ca46830012e8e79319b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   rotation:
     m_OverrideState: 0
     m_Value: 0
@@ -264,16 +264,16 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 4
   cloudType:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   skyAmbientMode:
     m_OverrideState: 1
     m_Value: 0
   windOrientation:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   windSpeed:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 100
   fogType:
     m_OverrideState: 1
@@ -327,7 +327,7 @@ MonoBehaviour:
     m_Value: 1
   altitudeRange:
     m_OverrideState: 1
-    m_Value: 1500
+    m_Value: 1250
   fadeInMode:
     m_OverrideState: 0
     m_Value: 0
@@ -412,8 +412,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.9
-        value: 0
+        time: 0.8187439
+        value: 0.14375916
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -422,7 +422,7 @@ MonoBehaviour:
         outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.1312561
         inSlope: 0
         outSlope: 0
         tangentMode: 0
