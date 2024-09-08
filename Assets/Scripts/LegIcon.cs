@@ -7,18 +7,13 @@ public class LegIcon : MonoBehaviour
 {
     [SerializeField] private int trackerID;
     [SerializeField] private Transform leg;
-    [SerializeField] private TMP_Text minValue, maxValue;
-    [SerializeField] private RectTransform meter;
 
     void Update()
     {
         if (HardwareManager.Instance.HardwareObjects.ContainsKey(trackerID))
         {
             Hardware h = HardwareManager.Instance.HardwareObjects[trackerID];
-            leg.localRotation = Quaternion.Euler(0, 0, 3);
-            minValue.SetText(h.MinValues.y.ToString("0.0"));
-            maxValue.SetText(h.MaxValues.y.ToString("0.0"));
-            meter.anchoredPosition = new Vector2(h.Direction.y / h.MaxValues.y * 165f, 0);
+            leg.localRotation = Quaternion.Euler(0, 0, h.Sum.y);
         }
     }
 }
