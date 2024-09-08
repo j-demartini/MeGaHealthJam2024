@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GarageMenu : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class GarageMenu : MonoBehaviour
     [SerializeField] private List<GameObject> hats = new List<GameObject>();
     [SerializeField] private float scrollSensitivity;
 
-    private bool colorChosen;
+    private bool colorChosen, hatChosen;
     private float choiceIndex;
     private float goIndex;
 
@@ -27,6 +28,12 @@ public class GarageMenu : MonoBehaviour
 
     void Update()
     {
+
+        if (!HardwareManager.Instance.HardwareObjects.ContainsKey(0) || !HardwareManager.Instance.HardwareObjects.ContainsKey(1))
+        {
+            return;
+        }
+
         if(!colorChosen)
         {
             choiceIndex += scrollSensitivity * HardwareManager.Instance.HardwareObjects[0].GetDirectionValue(Axis.Y);
@@ -44,10 +51,48 @@ public class GarageMenu : MonoBehaviour
                 colorOptions[i].SetSelected(i == Mathf.RoundToInt(choiceIndex));
             }
 
-            goIndex += scrollSensitivity * HardwareManager.Instance.HardwareObjects[0].GetDirectionValue(Axis.Y);
+            goIndex += scrollSensitivity * HardwareManager.Instance.HardwareObjects[1].GetDirectionValue(Axis.Y);
             if(goIndex > 2)
             {
+                // LOCK IN
+                colorChosen = true;
+                colorOptions[Mathf.RoundToInt(choiceIndex)].GetComponent<Image>().color = Color.blue;
+                choiceIndex = 0;
+                goIndex = 0;
+            }
 
+            return;
+
+        }
+
+        if (!hatChosen)
+        {
+            choiceIndex += scrollSensitivity * HardwareManager.Instance.HardwareObjects[0].GetDirectionValue(Axis.Y);
+            if (choiceIndex < 0)
+            {
+                choiceIndex = 5;
+            }
+            if (choiceIndex > 5)
+            {
+                choiceIndex = 0;
+            }
+
+            for (int i = 0; i < hatOptions.Count; i++)
+            {
+                hatOptions[i].SetSelected(i == Mathf.RoundToInt(choiceIndex));
+            }
+            
+            for(int i = 0; i < hats.Count; i++)
+            {
+                hats[i].SetActive(i == Mathf.RoundToInt(choiceIndex));
+            }
+
+            goIndex += scrollSensitivity * HardwareManager.Instance.HardwareObjects[1].GetDirectionValue(Axis.Y);
+            if (goIndex > 2)
+            {
+                // LOCK IN
+                hatChosen = true;
+                hatOptions[Mathf.RoundToInt(choiceIndex)].GetComponent<Image>().color = Color.blue;
             }
 
         }
