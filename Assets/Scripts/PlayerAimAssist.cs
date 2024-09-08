@@ -12,7 +12,8 @@ public class PlayerAimAssist : MonoBehaviour
         {
             if (CurrentTarget == null)
             {
-                CurrentTarget = other.gameObject;
+                if (!other.gameObject.GetComponent<Enemy>().isDying)
+                    CurrentTarget = other.gameObject;
             }
         }
     }
