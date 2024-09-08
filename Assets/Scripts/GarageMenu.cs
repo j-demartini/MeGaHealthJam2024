@@ -21,6 +21,8 @@ public class GarageMenu : MonoBehaviour
     private float choiceIndex;
     private float goIndex;
 
+    private int choiceLastFrame;
+
     void Awake()
     {
         Instance = this;    
@@ -33,6 +35,13 @@ public class GarageMenu : MonoBehaviour
         {
             return;
         }
+
+        if(choiceLastFrame != Mathf.RoundToInt(choiceIndex))
+        {
+            FXManager.Instance.PlaySFX("UIClick", 1f);
+            choiceLastFrame = Mathf.RoundToInt(choiceIndex);
+        }
+        
 
         if(!colorChosen)
         {
@@ -55,6 +64,7 @@ public class GarageMenu : MonoBehaviour
             if(goIndex > 2)
             {
                 // LOCK IN
+                FXManager.Instance.PlaySFX("UISelect", 1f);
                 colorChosen = true;
                 colorOptions[Mathf.RoundToInt(choiceIndex)].GetComponent<Image>().color = Color.blue;
                 choiceIndex = 0;
@@ -92,6 +102,7 @@ public class GarageMenu : MonoBehaviour
             {
                 // LOCK IN
                 hatChosen = true;
+                FXManager.Instance.PlaySFX("UISelect", 1f);
                 hatOptions[Mathf.RoundToInt(choiceIndex)].GetComponent<Image>().color = Color.blue;
             }
 
