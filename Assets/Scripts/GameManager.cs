@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform metricsMenu;
     [Header("SurveyMenu")]
     [SerializeField] private SurveyMenu surveyMenu;
+    [Header("Garage")]
+    [SerializeField] private GarageMenu garageMenu;
 
     private float runtime;
 
@@ -67,6 +69,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) == true);
         calibrationMenu.gameObject.SetActive(false);
         connectionMenu.gameObject.SetActive(false);
+        garageMenu.gameObject.SetActive(true);
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) == true);
 
         // Game Start
         GameStarted = true;
