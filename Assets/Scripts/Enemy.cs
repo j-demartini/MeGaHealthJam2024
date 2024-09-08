@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform[] bulletSpawnLoc;
     [SerializeField] private float bulletSpeed = 100f;
     [SerializeField] private float fireRate = 0.5f;
+    [SerializeField] private float fireRadius = 15f;
     private float cooldown = 0f;
 
     // Start is called before the first frame update
@@ -48,7 +49,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3 playerDir = (Player.Instance.transform.position - transform.position).normalized;
         cooldown += Time.deltaTime;
-        if (Vector3.Angle(transform.forward, playerDir) < 25f && cooldown >= fireRate)
+        if (Vector3.Angle(transform.forward, playerDir) < fireRadius && cooldown >= fireRate)
         {
             cooldown = 0f;
             foreach (Transform spawnLoc in bulletSpawnLoc)
@@ -74,6 +75,7 @@ public class Enemy : MonoBehaviour
     {
         // TODO: VFX
         Debug.Log("Enemy died");
+        EnemyManager.Instance.SpawnedEnemies.Remove(this);
         Destroy(gameObject);
     }
 }
