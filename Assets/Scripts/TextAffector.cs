@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum AffectorType
 { 
 
     None,
-    TypeIn,
-
+    TypeIn
 }
 
 public class TextAffector : MonoBehaviour
@@ -22,13 +22,13 @@ public class TextAffector : MonoBehaviour
     void OnEnable()
     {
         text = GetComponent<TMP_Text>();
+
         switch (type)
         {
 
             case AffectorType.TypeIn:
                 TypeIn();
                 break;
-        
         }
 
     }

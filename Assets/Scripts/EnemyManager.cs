@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum EnemyType
@@ -14,15 +15,24 @@ public class EnemyManager : MonoBehaviour
 
     public EnemyWave[] Waves { get => waves; }
     public int CurrentWave { get; private set; } = -1;
+    public List<Enemy> SpawnedEnemies { get => spawnedEnemies; }
 
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private EnemyWave[] waves;
     [SerializeField] private Transform enemyParent;
+    [SerializeField] private float nextWaveEnemyPercentage = 0.25f;
     [Space]
     [SerializeField] private int maxHorizontalSpawnRadius = 500;
-    [SerializeField] private int maxVerticalSpawnRadius = 100;
+    [SerializeField] private int maxVerticalSpawnRadius = 200;
+    [SerializeField] private int verticalSpawnOffset = 750;
+    [SerializeField] private int minSpawnDistToPlayer = 100;
+    [Space]
+    [SerializeField] private GameObject waveMenu;
+    [Space]
+    [SerializeField] private bool debug = false;
 
     private List<Enemy> spawnedEnemies = new List<Enemy>();
+    private int spawnedEnemyCount = 0;
 
     void Awake()
     {
@@ -35,23 +45,55 @@ public class EnemyManager : MonoBehaviour
         EnemyWave wave = waves[CurrentWave];
         List<EnemyType> waveEnemies = wave.CreateWave();
 
-        foreach (EnemyType type in waveEnemies)
+        for (int i = 0; i < waveEnemies.Count; i++)
         {
+            EnemyType type = waveEnemies[i];
             GameObject prefab = enemyPrefabs[(int)type];
-            Vector3 spawnPos = new Vector3(Random.Range(-maxHorizontalSpawnRadius, maxHorizontalSpawnRadius), Random.Range(-maxVerticalSpawnRadius, maxVerticalSpawnRadius), Random.Range(-maxHorizontalSpawnRadius, maxHorizontalSpawnRadius));
-            GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity, enemyParent);
+            Vector3 spawnPos = new Vector3(Random.Range(-maxHorizontalSpawnRadius, maxHorizontalSpawnRadius), Random.Range(-maxVerticalSpawnRadius + verticalSpawnOffset, maxVerticalSpawnRadius + verticalSpawnOffset), Random.Range(-maxHorizontalSpawnRadius, maxHorizontalSpawnRadius));
+            Vector3 spawnRot = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
+            GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.Euler(spawnRot), enemyParent);
+
+            if ((spawnPos - Player.Instance.transform.position).magnitude < minSpawnDistToPlayer)
+            {
+                Destroy(enemy);
+                i--;
+                continue;
+            }
+
             spawnedEnemies.Add(enemy.GetComponent<Enemy>());
         }
+
+        spawnedEnemyCount = spawnedEnemies.Count;
+        StartCoroutine(WaveMenuDisplay(wave));
+    }
+
+    private IEnumerator WaveMenuDisplay(EnemyWave wave)
+    {
+        waveMenu.GetComponentInChildren<TMP_Text>().text = "Wave " + (CurrentWave + 1) + ": " + wave.WaveName;
+        waveMenu.GetComponentInChildren<FadeUI>().Display(true);
+        yield return new WaitForSeconds(5f);
+        waveMenu.GetComponentInChildren<FadeUI>().Display(false);
     }
 
     void Start()
     {
-        StartNewWave();
+        if (debug)
+        {
+            StartNewWave();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (debug && Input.GetKeyDown(KeyCode.N))
+        {
+            StartNewWave();
+        }
 
+        if (((float)spawnedEnemies.Count / (float)spawnedEnemyCount) < nextWaveEnemyPercentage)
+        {
+            StartNewWave();
+        }
     }
 }

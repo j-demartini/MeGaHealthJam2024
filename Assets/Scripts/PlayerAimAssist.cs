@@ -10,11 +10,9 @@ public class PlayerAimAssist : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Debug.Log("Trigger Enter");
             if (CurrentTarget == null)
             {
                 CurrentTarget = other.gameObject;
-                Debug.Log("Target Acquired");
             }
         }
     }
