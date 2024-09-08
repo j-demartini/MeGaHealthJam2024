@@ -70,7 +70,6 @@ public class HardwareManager : MonoBehaviour
         {
             //Debug.Log("Parsing data.");
             string message = data.Dequeue();
-            Debug.Log(message);
             string[] packet = message.Split(',');
             int id = int.Parse(packet[0]);
             float gyroX = float.Parse(packet[1]);

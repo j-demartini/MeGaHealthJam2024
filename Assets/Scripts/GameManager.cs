@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    public bool GameStarted { get; private set; }
+
     [Header("Connection")]
     [SerializeField] private Transform connectionMenu;
     [SerializeField] private TextAffector connectionTitle;
@@ -19,6 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextAffector textAffectorTitle;
     [SerializeField] private TextAffector calibrationMessage;
     [SerializeField] private TextAffector pressStart2;
+    [Header("Metrics")]
+    [SerializeField] private Transform metricsMenu;
+    
 
     // Start is called before the first frame update
     void Awake()
@@ -49,6 +54,20 @@ public class GameManager : MonoBehaviour
         calibrationMessage.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.25f);
         pressStart2.gameObject.SetActive(true);
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) == true);
+        calibrationMenu.gameObject.SetActive(false);
+        connectionMenu.gameObject.SetActive(false);
+
+        // Game Start
+        GameStarted = true;
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.R) == true);
+        metricsMenu.gameObject.SetActive(true);
+        MetricManager.Instance.PopulateLine();
+        GameStarted = false;
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) == true);
 
 
 
