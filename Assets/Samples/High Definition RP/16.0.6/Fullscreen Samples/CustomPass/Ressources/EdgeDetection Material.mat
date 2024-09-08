@@ -39,13 +39,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _Background_Opacity: 0
-    - _Depth_Detection_Fade_Value: 0
+    - _Depth_Detection_Fade_Value: 0.896
     - _Depth_Detection_Step_Value: 0.01
     - _Depth_Sensitivity: 1.62
     - _Distance_Edge_SIze_Multiplier: 1
     - _Edge_Distance_Decrease: 10
     - _Edge_Opacity: 1.26
-    - _Edge_Size: 1.33
+    - _Edge_Size: 1
     - _Fade_Value: 0.266
     - _Float: 0.01
     - _Float_1: 0.1
