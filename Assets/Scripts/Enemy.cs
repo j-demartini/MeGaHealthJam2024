@@ -74,6 +74,7 @@ public class Enemy : MonoBehaviour
     {
         // TODO: VFX
         Debug.Log("Enemy died");
+        EnemyManager.Instance.SpawnedEnemies.Remove(this);
         Destroy(gameObject);
     }
 }

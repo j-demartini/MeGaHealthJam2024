@@ -50,6 +50,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (debug || !GameManager.Instance.GameStarted)
+        //{
+        //    return;
+        //}
+
         if (debug)
         {
             HardwareManager.Instance.HardwareObjects[(int)Sensor.LeftWheel].Direction = new Vector3(0, 0, 0);
@@ -73,8 +78,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        Movement();
         AimAssist();
+        Movement();
         Gun();
         GracePeriod();
     }
@@ -111,7 +116,7 @@ public class Player : MonoBehaviour
             else
             {
                 transform.Rotate(Vector3.up, yawSpeed * Mathf.Sign(leftDir.y) * ((Mathf.Abs(leftDir.y) + Mathf.Abs(rightDir.y)) / 2) * Time.deltaTime);
-                transform.Rotate(Vector3.forward, rollSpeed * Mathf.Sign(-leftDir.y) * ((Mathf.Abs(leftDir.y) + Mathf.Abs(rightDir.y)) / 2) * Time.deltaTime);
+                transform.Rotate(transform.forward, rollSpeed * Mathf.Sign(-leftDir.y) * ((Mathf.Abs(leftDir.y) + Mathf.Abs(rightDir.y)) / 2) * Time.deltaTime);
             }
         }
     }
@@ -121,7 +126,9 @@ public class Player : MonoBehaviour
         if (aimAssist.CurrentTarget != null)
         {
             Vector3 targetDir = (aimAssist.CurrentTarget.transform.position - transform.position).normalized;
+            Vector3 cachedRot = transform.rotation.eulerAngles;
             transform.forward = Vector3.Lerp(transform.forward, targetDir, aimAssistStrength * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, cachedRot.z));
         }
     }
 
@@ -150,7 +157,15 @@ public class Player : MonoBehaviour
                 bullet.GetComponent<Bullet>().AimAssistStrength = bulletCurve;
             }
             bullet.GetComponent<Bullet>().Fire(bulletSpeed);
+            StartCoroutine(MuzzleFlash(bulletSpawnLocs[gun].transform.GetChild(0).gameObject));
         }
+    }
+
+    private IEnumerator MuzzleFlash(GameObject flash)
+    {
+        flash.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        flash.SetActive(false);
     }
 
     public void TakeDamage(int damage)

@@ -6,7 +6,9 @@ using UnityEngine;
 public class EnemyWave : MonoBehaviour
 {
     public float DifficultyMultiplier { get => difficultyMultiplier; }
+    public string WaveName { get => waveName; }
 
+    [SerializeField] private string waveName;
     [SerializeField] private EnemyType[] enemyTypes;
 
     [Tooltip("The probability of each enemy type spawning, MUST ADD TO 1")]

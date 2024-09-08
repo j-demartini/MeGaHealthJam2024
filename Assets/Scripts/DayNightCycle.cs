@@ -7,6 +7,8 @@ public class DayNightCycle : MonoBehaviour
     public static DayNightCycle Instance { get; private set; }
 
     private Rotate rotate;
+    [Space]
+    [SerializeField] private bool debug = false;
 
     public bool IsDay
     {
@@ -37,6 +39,15 @@ public class DayNightCycle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (debug || GameManager.Instance.GameStarted)
+        {
+            rotate.enabled = true;
+        }
+        else
+        {
+            rotate.enabled = false;
+        }
+
         if (transform.eulerAngles.x > 360)
         {
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
