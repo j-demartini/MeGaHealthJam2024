@@ -101,6 +101,7 @@ public class GarageMenu : MonoBehaviour
             if (goIndex > 2)
             {
                 // LOCK IN
+                GameManager.Instance.Work = true;
                 hatChosen = true;
                 FXManager.Instance.PlaySFX("UISelect", 1f);
                 hatOptions[Mathf.RoundToInt(choiceIndex)].GetComponent<Image>().color = Color.blue;

@@ -124,7 +124,7 @@ public class MetricManager : MonoBehaviour
         float velRight = rightWheel.GetDirectionValue(Axis.Y);
         if((velLeft > 0 && velRight > 0) || (velLeft < 0 && velRight < 0))
         {                                               // radius in meters of the chair
-            distanceTraveled += (velLeft * (1f / 119f) * Mathf.Deg2Rad) * 0.75f;
+            distanceTraveled += Mathf.Abs((velLeft * (1f / 119f) * Mathf.Deg2Rad) * 0.75f);
         }
     }
 

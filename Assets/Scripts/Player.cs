@@ -36,9 +36,12 @@ public class Player : MonoBehaviour
     [Space]
     [SerializeField] private bool debug = false;
 
+    private bool autoFire = false;
+
     void Awake()
     {
         Instance = this;
+        gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -50,10 +53,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (debug || !GameManager.Instance.GameStarted)
-        //{
-        //    return;
-        //}
+        if (debug || !GameManager.Instance.GameStarted)
+        {
+           return;
+        }
 
         if (debug)
         {
@@ -96,6 +99,12 @@ public class Player : MonoBehaviour
 
     private void Movement()
     {
+
+        if (!GameManager.Instance.GameStarted)
+        {
+            return;
+        }
+
         transform.position += transform.forward * speed * Time.deltaTime;
         transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(new Vector3(0, transform.localEulerAngles.y, 0)), resetMultiplier * Time.deltaTime);
 
@@ -143,8 +152,14 @@ public class Player : MonoBehaviour
             }
         }
 
-        cooldown += Time.deltaTime * HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude;
-        if (HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude > noiseThreshold && cooldown >= fireRate)
+        if(HardwareManager.Instance.HardwareObjects.Count < 3) 
+        {
+            autoFire = true;
+        }
+
+
+        cooldown += Time.deltaTime * (autoFire ? 1f :HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude);
+        if ((autoFire || HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude > noiseThreshold) && cooldown >= fireRate)
         {
             cooldown = 0f;
             int gun = Random.Range(0, bulletSpawnLocs.Length);

@@ -43,7 +43,7 @@ public class Hardware : MonoBehaviour
 
     public void ReceiveGyro(float x, float y, float z)
     {
-        Vector3 gyro = new Vector3(x, -z, -y) * Mathf.Rad2Deg;
+        Vector3 gyro = new Vector3(x, -z, -y) * (ID == 2 ? -1 : -Mathf.Rad2Deg);
         if (calibratedGyro)
         {
             Sum += (gyro - (calibratedGyroPosition)) * (1f / 119f);
@@ -133,7 +133,9 @@ public class Hardware : MonoBehaviour
 
     public float GetSumValue()
     {
-        return Sum.y / MaxSum;
+        float current = Sum.y + MinSum;
+        float max = MaxSum - MinSum;
+        return current / max;
     }
 
 }

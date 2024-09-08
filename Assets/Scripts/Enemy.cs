@@ -78,6 +78,7 @@ public class Enemy : MonoBehaviour
     {
         // TODO: VFX
         Debug.Log("Enemy died");
+        GameManager.Instance.enemiesKilled++;
         isDying = true;
         FXManager.Instance.PlayVFX("Explosion", transform.position, 25f);
         foreach (Transform spawnLoc in fireSpawnLoc)

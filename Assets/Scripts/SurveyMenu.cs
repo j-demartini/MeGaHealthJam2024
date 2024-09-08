@@ -32,7 +32,7 @@ public class SurveyMenu : MonoBehaviour
             choiceLastFrame = Mathf.RoundToInt(choiceIndex);
         }
 
-        if (!HardwareManager.Instance.HardwareObjects.ContainsKey(0) || !HardwareManager.Instance.HardwareObjects.ContainsKey(1) || !HardwareManager.Instance.HardwareObjects.ContainsKey(2))
+        if (!HardwareManager.Instance.HardwareObjects.ContainsKey(0) || !HardwareManager.Instance.HardwareObjects.ContainsKey(1))
         {
             return;
         }
