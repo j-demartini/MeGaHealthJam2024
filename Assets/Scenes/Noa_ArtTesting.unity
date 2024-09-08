@@ -119,77 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &609901167
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 609901168}
-  - component: {fileID: 609901169}
-  m_Layer: 0
-  m_Name: SobelFilter_CustomPass(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &609901168
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 609901167}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1083537072}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &609901169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 609901167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d6499a6bd256e47b859377446493a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  fadeRadius: 0
-  priority: 0
-  customPasses:
-  - rid: 5596590357460549633
-  injectionPoint: 2
-  m_TargetCamera: {fileID: 0}
-  useTargetCamera: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 5596590357460549633
-      type: {class: FullScreenCustomPass, ns: UnityEngine.Rendering.HighDefinition,
-        asm: Unity.RenderPipelines.HighDefinition.Runtime}
-      data:
-        m_Name: SobelFilter
-        enabled: 1
-        targetColorBuffer: 0
-        targetDepthBuffer: 2
-        clearFlags: 0
-        passFoldout: 0
-        m_Version: 0
-        fullscreenPassMaterial: {fileID: 2100000, guid: 684b1d69604c7a14cb16dd0dbeb4c25a,
-          type: 2}
-        materialPassIndex: 0
-        materialPassName: Custom Pass 0
-        fetchColorBuffer: 0
 --- !u!1 &810035407
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,13 +383,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f6aa982297d1343afb73a190167121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullscreenEffect: 3
+  fullscreenEffect: 1
   effectPrefabs:
   - {fileID: 8746464515375715810, guid: f5038a8dc7d0ed840967857011a9c921, type: 3}
   - {fileID: 1754725759480187892, guid: d5a8b9086a29f184bb08682d56100e1c, type: 3}
   - {fileID: 1754725759480187892, guid: d5a8b9086a29f184bb08682d56100e1c, type: 3}
-  infos: "Fullscreen Custom Pass that uses a Shadergraph that performs a Sobel Filter
-    on the Scene Color.\n\n Codeless."
+  infos: "Fullscreen Custom Pass using a Shadergraph. \nThe material performs a Robert
+    Cross Edge Detection on the Scene Depth and Normal Buffer. \nThe normal and depth
+    buffer happens before Transparency in the rendering pipeline. \nIt means that
+    transparent objects won't be seen by this effect.\n\nCodeless."
   infoText: {fileID: 0}
   useAttachedDayNightProfile: 1
   timeOfDay: 0
@@ -481,9 +412,205 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 609901168}
+  - {fileID: 1434828366}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1434828365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1434828366}
+  - component: {fileID: 1434828367}
+  m_Layer: 0
+  m_Name: EdgeDetection_CustomPass(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1434828366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434828365}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1083537072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1434828367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434828365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d6499a6bd256e47b859377446493a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  fadeRadius: 0
+  priority: 0
+  customPasses:
+  - rid: 5596590310021136389
+  injectionPoint: 2
+  m_TargetCamera: {fileID: 0}
+  useTargetCamera: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 5596590310021136389
+      type: {class: FullScreenCustomPass, ns: UnityEngine.Rendering.HighDefinition,
+        asm: Unity.RenderPipelines.HighDefinition.Runtime}
+      data:
+        m_Name: EdgeDetection
+        enabled: 1
+        targetColorBuffer: 0
+        targetDepthBuffer: 2
+        clearFlags: 0
+        passFoldout: 0
+        m_Version: 0
+        fullscreenPassMaterial: {fileID: 2100000, guid: 26ca92885f79945469fc4508c0c8138c,
+          type: 2}
+        materialPassIndex: 0
+        materialPassName: Custom Pass 0
+        fetchColorBuffer: 0
+--- !u!1001 &1596518836
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.3934817
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.3934817
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.3934817
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.466329
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.24
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.71285725
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6093592463355912122, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e8c5dffffa08ee40b0dfba1667f3ee3, type: 2}
+    - target: {fileID: -4683669308469848369, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e8c5dffffa08ee40b0dfba1667f3ee3, type: 2}
+    - target: {fileID: -1806680513116206669, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e8c5dffffa08ee40b0dfba1667f3ee3, type: 2}
+    - target: {fileID: -1461304994638716399, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e8c5dffffa08ee40b0dfba1667f3ee3, type: 2}
+    - target: {fileID: -1120989108687609925, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e8c5dffffa08ee40b0dfba1667f3ee3, type: 2}
+    - target: {fileID: -804731622281664130, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e8c5dffffa08ee40b0dfba1667f3ee3, type: 2}
+    - target: {fileID: -678588488315902003, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e8c5dffffa08ee40b0dfba1667f3ee3, type: 2}
+    - target: {fileID: 919132149155446097, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: m_Name
+      value: Blimp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745302439343835087, guid: b5b7aa95f55a1b64ca30d73b21fd4775,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e8c5dffffa08ee40b0dfba1667f3ee3, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 7567344177612113157, guid: b5b7aa95f55a1b64ca30d73b21fd4775, type: 3}
+    - {fileID: -259183262721249489, guid: b5b7aa95f55a1b64ca30d73b21fd4775, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5b7aa95f55a1b64ca30d73b21fd4775, type: 3}
 --- !u!1 &1621948785
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,3 +997,4 @@ SceneRoots:
   - {fileID: 2137854907}
   - {fileID: 1621948787}
   - {fileID: 1083537072}
+  - {fileID: 1596518836}
