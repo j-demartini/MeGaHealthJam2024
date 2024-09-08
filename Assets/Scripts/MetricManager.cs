@@ -69,7 +69,6 @@ public class MetricManager : MonoBehaviour
             if (lineTimer > 0.2f)
             {
                 lineValues.Add(gameTimer, leg.GetSumValue());
-                Debug.Log("Adding: " + gameTimer + " | " + leg.GetSumValue());
                 lineTimer = 0;
             }
             lineTimer += Time.deltaTime;
@@ -137,6 +136,26 @@ public class MetricManager : MonoBehaviour
         {
             linePositions.Add(new Vector3(f * (4f / gameTimer), lineValues[f] / 4f, 0));
         }
+    }
+
+    public float GetDistanceTravelled()
+    {
+        return distanceTraveled;
+    }
+
+    public float GetAvgLegAngle()
+    {
+        return legExtensionHeightSum / legExtensions;
+    }
+
+    public float GetMaxLegAngle()
+    {
+        return maxExtensionHeight;
+    }
+
+    public int GetRaises()
+    {
+        return legExtensions;
     }
 
 }
