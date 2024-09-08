@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     private float cooldown = 0f;
     public bool isDying = false;
 
-    public float explosionSize = 25f;
+    public float explosionSize = 12.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
         FXManager.Instance.PlaySFX("Explosion", 1f);
         GameManager.Instance.enemiesKilled++;
         isDying = true;
-        FXManager.Instance.PlayVFX("Explosion", transform.position, 12.5f);
+        FXManager.Instance.PlayVFX("Explosion", transform.position, explosionSize);
         GetComponentInChildren<VisualEffect>().enabled = true;
         EnemyManager.Instance.SpawnedEnemies.Remove(this);
         Invoke("Delete", 10f);

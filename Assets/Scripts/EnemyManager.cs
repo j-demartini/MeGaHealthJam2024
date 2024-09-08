@@ -77,7 +77,7 @@ public class EnemyManager : MonoBehaviour
 
             if (type == EnemyType.Blimp)
             {
-                enemy.GetComponent<Enemy>().explosionSize = 50f;
+                enemy.GetComponent<Enemy>().explosionSize = 25f;
             }
         }
 
