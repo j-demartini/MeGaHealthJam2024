@@ -14,6 +14,7 @@ public class SurveyMenu : MonoBehaviour
     private float goIndex;
 
     private int comfortValue, painValue, helpfulValue;
+    private int choiceLastFrame;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,12 @@ public class SurveyMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(choiceLastFrame != Mathf.RoundToInt(choiceIndex))
+        {
+            FXManager.Instance.PlaySFX("UIClick", 1f);
+            choiceLastFrame = Mathf.RoundToInt(choiceIndex);
+        }
 
         if (!HardwareManager.Instance.HardwareObjects.ContainsKey(0) || !HardwareManager.Instance.HardwareObjects.ContainsKey(1) || !HardwareManager.Instance.HardwareObjects.ContainsKey(2))
         {
@@ -52,6 +59,7 @@ public class SurveyMenu : MonoBehaviour
             goIndex += scrollSensitivity * HardwareManager.Instance.HardwareObjects[1].GetDirectionValue(Axis.Y);
             if (goIndex > 2)
             {
+                FXManager.Instance.PlaySFX("UISelect", 1f);
                 // LOCK IN
                 painChosen = true;
                 painOptions[Mathf.RoundToInt(choiceIndex)].GetComponent<Image>().color = Color.blue;
@@ -85,6 +93,7 @@ public class SurveyMenu : MonoBehaviour
             if (goIndex > 2)
             {
                 // LOCK IN
+                FXManager.Instance.PlaySFX("UISelect", 1f);
                 discomfortChosen = true;
                 discomfortOptions[Mathf.RoundToInt(choiceIndex)].GetComponent<Image>().color = Color.blue;
                 comfortValue = Mathf.RoundToInt(choiceIndex) + 1;
@@ -117,6 +126,7 @@ public class SurveyMenu : MonoBehaviour
             if (goIndex > 2)
             {
                 // LOCK IN
+                FXManager.Instance.PlaySFX("UISelect", 1f);
                 ptChosen = true;
                 ptOptions[Mathf.RoundToInt(choiceIndex)].GetComponent<Image>().color = Color.blue;
                 helpfulValue = Mathf.RoundToInt(choiceIndex) + 1;

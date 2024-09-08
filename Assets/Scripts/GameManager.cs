@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         GameStarted = true;
 //        EnemyManager.Instance.StartNewWave();
 
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.R) == true);
+        yield return new WaitUntil(() => EnemyManager.Instance.GameComplete);
         metricsMenu.gameObject.SetActive(true);
         MetricManager.Instance.PopulateLine();
         GameStarted = false;
