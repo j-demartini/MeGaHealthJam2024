@@ -17,6 +17,8 @@ public class EnemyManager : MonoBehaviour
     public int CurrentWave { get; private set; } = -1;
     public List<Enemy> SpawnedEnemies { get => spawnedEnemies; }
 
+    public bool GameComplete { get; private set; }
+
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private EnemyWave[] waves;
     [SerializeField] private Transform enemyParent;
@@ -42,6 +44,13 @@ public class EnemyManager : MonoBehaviour
     public void StartNewWave()
     {
         CurrentWave++;
+
+        if (CurrentWave >= waves.Length)
+        {
+            GameComplete = true;
+            return;
+        }
+
         EnemyWave wave = waves[CurrentWave];
         List<EnemyType> waveEnemies = wave.CreateWave();
 
