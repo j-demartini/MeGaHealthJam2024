@@ -61,6 +61,10 @@ public class EnemyManager : MonoBehaviour
             Vector3 spawnPos = new Vector3(Random.Range(-maxHorizontalSpawnRadius, maxHorizontalSpawnRadius), Random.Range(-maxVerticalSpawnRadius + verticalSpawnOffset, maxVerticalSpawnRadius + verticalSpawnOffset), Random.Range(-maxHorizontalSpawnRadius, maxHorizontalSpawnRadius));
             Vector3 spawnRot = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
             GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.Euler(spawnRot), enemyParent);
+            if (!enemy.GetComponent<Enemy>().ShouldPitch)
+            {
+                enemy.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+            }
 
             if ((spawnPos - Player.Instance.transform.position).magnitude < minSpawnDistToPlayer)
             {
