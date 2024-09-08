@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781cc897cf8675041a751163b51f97dd, type: 3}
   m_Name: HDRenderPipelineGlobalSettings
   m_EditorClassIdentifier: 
+  m_Version: 10
+  m_ShaderStrippingSetting:
+    m_Version: 0
+    m_ExportShaderVariants: 1
+    m_ShaderVariantLogLevel: 0
+    m_StripRuntimeDebugShaders: 0
+  m_ShaderVariantLogLevel: 0
+  m_SupportRuntimeDebugDisplay: 0
+  m_ExportShaderVariants: 1
+  m_StripDebugVariants: 0
   m_Settings:
     m_SettingsList: []
     m_RuntimeSettings: []
@@ -185,16 +195,6 @@ MonoBehaviour:
     hasProbeVolumes:
       m_Keys: []
       m_Values: 
-  m_Version: 10
-  m_ShaderStrippingSetting:
-    m_Version: 0
-    m_ExportShaderVariants: 1
-    m_ShaderVariantLogLevel: 0
-    m_StripRuntimeDebugShaders: 0
-  m_ShaderVariantLogLevel: 0
-  m_SupportRuntimeDebugDisplay: 0
-  m_ExportShaderVariants: 1
-  m_StripDebugVariants: 0
   references:
     version: 2
     RefIds: []
