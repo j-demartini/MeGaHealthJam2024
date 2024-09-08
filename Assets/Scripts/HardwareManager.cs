@@ -20,6 +20,8 @@ public class HardwareManager : MonoBehaviour
 
     public static HardwareManager Instance { get; private set; }
 
+    public bool IsDebugging { get => debug; }
+
     [HideInInspector]
     public UnityEvent<Hardware> TrackerConnected;
     [HideInInspector]
@@ -62,7 +64,6 @@ public class HardwareManager : MonoBehaviour
                 Hardware hardware = hardwareParent.GetChild(i).GetComponent<Hardware>();
                 hardwareObjects.Add(i, hardware);
                 hardware.Init(i);
-                //Debug.Log("Debugging hardware: " + hardwareObjects[i].ID);
             }
         }
     }
