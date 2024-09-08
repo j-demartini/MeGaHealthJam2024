@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private List<GameObject> hats = new List<GameObject>();
 
+    [SerializeField] private AudioSource fireSource;
+
     private bool autoFire = false;
 
     void Awake()
@@ -57,7 +59,7 @@ public class Player : MonoBehaviour
     {
         if (debug || !GameManager.Instance.GameStarted)
         {
-           return;
+            return;
         }
 
         if (debug)
@@ -111,7 +113,6 @@ public class Player : MonoBehaviour
 
     private void Movement()
     {
-
         if (!GameManager.Instance.GameStarted)
         {
             return;
@@ -146,6 +147,10 @@ public class Player : MonoBehaviour
     {
         if (aimAssist.CurrentTarget != null)
         {
+            if (aimAssist.CurrentTarget.GetComponent<Enemy>().isDying)
+            {
+                return;
+            }
             Vector3 targetDir = (aimAssist.CurrentTarget.transform.position - transform.position).normalized;
             Vector3 cachedRot = transform.rotation.eulerAngles;
             transform.forward = Vector3.Lerp(transform.forward, targetDir, aimAssistStrength * Time.deltaTime);
@@ -164,13 +169,13 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(HardwareManager.Instance.HardwareObjects.Count < 3) 
+        if (HardwareManager.Instance.HardwareObjects.Count < 3)
         {
             autoFire = true;
         }
 
 
-        cooldown += Time.deltaTime * (autoFire ? 1f :HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude);
+        cooldown += Time.deltaTime * (autoFire ? 1f : HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude);
         if ((autoFire || HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude > noiseThreshold) && cooldown >= fireRate)
         {
             cooldown = 0f;
@@ -185,6 +190,15 @@ public class Player : MonoBehaviour
             }
             bullet.GetComponent<Bullet>().Fire(bulletSpeed);
             StartCoroutine(MuzzleFlash(bulletSpawnLocs[gun].transform.GetChild(0).gameObject));
+
+            if (!fireSource.isPlaying)
+            {
+                fireSource.Play();
+            }
+        }
+        else if (fireSource.isPlaying)
+        {
+            fireSource.Stop();
         }
     }
 
@@ -214,5 +228,14 @@ public class Player : MonoBehaviour
         // TODO: VFX
         Debug.Log("Player died");
         Destroy(gameObject);
+        EnemyManager.Instance.GameComplete = true;
+    }
+
+    void OnCollisonEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Environment"))
+        {
+            Die();
+        }
     }
 }

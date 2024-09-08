@@ -17,7 +17,7 @@ public class EnemyManager : MonoBehaviour
     public int CurrentWave { get; private set; } = -1;
     public List<Enemy> SpawnedEnemies { get => spawnedEnemies; }
 
-    public bool GameComplete { get; private set; }
+    public bool GameComplete { get; set; }
 
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private EnemyWave[] waves;
@@ -74,6 +74,11 @@ public class EnemyManager : MonoBehaviour
             }
 
             spawnedEnemies.Add(enemy.GetComponent<Enemy>());
+
+            if (type == EnemyType.Blimp)
+            {
+                enemy.GetComponent<Enemy>().explosionSize = 25f;
+            }
         }
 
         spawnedEnemyCount = spawnedEnemies.Count;
