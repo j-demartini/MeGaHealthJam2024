@@ -132,9 +132,10 @@ public class MetricManager : MonoBehaviour
     public void PopulateLine()
     {
         populatingLine = true;
+        r.transform.localScale = new Vector3(1f, 1f, 1f);
         foreach (float f in lineValues.Keys)
         {
-            linePositions.Add(new Vector3(f, lineValues[f], 0));
+            linePositions.Add(new Vector3(f * (4f / gameTimer), lineValues[f] / 4f, 0));
         }
     }
 
