@@ -33,8 +33,8 @@ public class Hardware : MonoBehaviour
     {
         if (Time.realtimeSinceStartup - lastCommTime > hardwareTimeout)
         {
-            HardwareManager.Instance.TrackerDisconnected.Invoke(this);
-            Destroy(this.gameObject);
+            //HardwareManager.Instance.TrackerDisconnected.Invoke(this);
+            //Destroy(this.gameObject);
         }
     }
 

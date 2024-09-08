@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1107440074750354978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546586035578180303}
+  m_Layer: 7
+  m_Name: BSpawnA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1546586035578180303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107440074750354978}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.794, y: 1.073, z: 0.468}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7584407996569576295}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4385501657459798217
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +43,7 @@ GameObject:
   - component: {fileID: 4471984977114927316}
   - component: {fileID: 870687313769585321}
   - component: {fileID: 7824225308871966976}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +150,7 @@ GameObject:
   - component: {fileID: 5259775108263940324}
   - component: {fileID: 4047431372447522831}
   - component: {fileID: 3208886930192130156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cyllinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +257,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7584407996569576295}
   - component: {fileID: 3037580681381761588}
-  m_Layer: 0
+  - component: {fileID: 6374009324163830840}
+  m_Layer: 7
   m_Name: PlaneEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,13 +273,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6682411016322678527}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2110331121735126934}
   - {fileID: 5236745948670483528}
+  - {fileID: 1546586035578180303}
+  - {fileID: 2513778586291200823}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3037580681381761588
@@ -262,8 +296,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c47049e08cfaef5ae8d9b8727fc8fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitPoints: 2
-  speed: 20
+  maxHitPoints: 1
+  speed: 15
   trackingSpeed: 0.5
   shouldPitch: 1
   rollSpeed: 20
+  bulletPrefab: {fileID: 7713721714757078567, guid: 20e099999945b5c75a3e96ad29dbecc4,
+    type: 3}
+  bulletSpawnLoc:
+  - {fileID: 1546586035578180303}
+  - {fileID: 2513778586291200823}
+  bulletSpeed: 100
+  fireRate: 0.5
+--- !u!54 &6374009324163830840
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682411016322678527}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!1 &6756241024918202118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2513778586291200823}
+  m_Layer: 7
+  m_Name: BSpawnB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2513778586291200823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6756241024918202118}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.794, y: 1.073, z: 0.468}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7584407996569576295}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

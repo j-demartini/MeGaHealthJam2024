@@ -32,6 +32,8 @@ public class HardwareManager : MonoBehaviour
     [SerializeField] private Dictionary<int, Hardware> hardwareObjects = new Dictionary<int, Hardware>();
     [SerializeField] private GameObject hardwarePrefab;
     [SerializeField] private Transform hardwareParent;
+    [Space]
+    [SerializeField] private bool debug = false;
 
     private Socket socket;
     private Queue<string> data = new Queue<string>();
@@ -53,6 +55,16 @@ public class HardwareManager : MonoBehaviour
             hardwareObjects.Remove(hardware.ID);
         });
 
+        if (debug)
+        {
+            for (int i = 0; i < hardwareParent.childCount; i++)
+            {
+                Hardware hardware = hardwareParent.GetChild(i).GetComponent<Hardware>();
+                hardwareObjects.Add(i, hardware);
+                hardware.Init(i);
+                //Debug.Log("Debugging hardware: " + hardwareObjects[i].ID);
+            }
+        }
     }
 
     void OnDisable()
