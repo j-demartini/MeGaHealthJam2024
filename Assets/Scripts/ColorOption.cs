@@ -28,6 +28,7 @@ public class ColorOption : MonoBehaviour
         if(b)
         {
             GarageMenu.Instance.GetPlane().material.color = color;
+            Player.Instance.SetColor(color);
         }
     }
 

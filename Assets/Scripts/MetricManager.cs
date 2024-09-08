@@ -88,6 +88,8 @@ public class MetricManager : MonoBehaviour
             }
         }
 
+        Debug.Log(GetDistanceTravelled());
+
     }
 
     public void LegExtensions()
@@ -124,7 +126,10 @@ public class MetricManager : MonoBehaviour
         float velRight = rightWheel.GetDirectionValue(Axis.Y);
         if((velLeft > 0 && velRight > 0) || (velLeft < 0 && velRight < 0))
         {                                               // radius in meters of the chair
-            distanceTraveled += Mathf.Abs((velLeft * (1f / 119f) * Mathf.Deg2Rad) * 0.75f);
+            if(!float.IsNaN(velLeft) && !float.IsNaN(velRight) && velLeft > -10 && velLeft < 10 && velRight < 10 && velRight > -10)
+            {
+                distanceTraveled += Mathf.Abs((velLeft * (1f / 119f)) * 0.75f);
+            }
         }
     }
 
@@ -150,7 +155,7 @@ public class MetricManager : MonoBehaviour
 
     public float GetMaxLegAngle()
     {
-        return maxExtensionHeight;
+        return highestEverExtension;
     }
 
     public int GetRaises()

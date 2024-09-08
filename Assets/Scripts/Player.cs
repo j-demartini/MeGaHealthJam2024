@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     [Space]
     [SerializeField] private bool debug = false;
 
+    [SerializeField] private List<GameObject> hats = new List<GameObject>();
+
     private bool autoFire = false;
 
     void Awake()
@@ -95,6 +97,16 @@ public class Player : MonoBehaviour
             graceTimer = 0f;
             maxHitPoints += 1;
         }
+    }
+
+    public void SetColor(Color c)
+    {
+        GetComponentInChildren<MeshRenderer>().material.color = c;
+    }
+
+    public void SetHat(int hatID)
+    {
+        hats[hatID].SetActive(true);
     }
 
     private void Movement()

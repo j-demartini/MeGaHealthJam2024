@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
+        NotificationManager.Instance.CreateNotification("Cloud Connection", "Patient data transfer complete.", 1.5f);
         AirtableManager.Instance.PublishMetrics(MetricManager.Instance.GetDistanceTravelled(), MetricManager.Instance.GetAvgLegAngle(), MetricManager.Instance.GetMaxLegAngle(), MetricManager.Instance.GetRaises(), runtime, surveyMenu.GetPainValue(), surveyMenu.GetComfortValue(), surveyMenu.GetHelpfulValue());
 
 
