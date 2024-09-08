@@ -23,7 +23,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextAffector pressStart2;
     [Header("Metrics")]
     [SerializeField] private Transform metricsMenu;
-    
+    [Header("SurveyMenu")]
+    [SerializeField] private SurveyMenu surveyMenu;
+
+    private float runtime;
 
     // Start is called before the first frame update
     void Awake()
@@ -35,6 +38,12 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(GameLoop());
+    }
+
+    void Update()
+    {
+        if(GameStarted)
+        runtime += Time.deltaTime;
     }
 
     public IEnumerator GameLoop()
@@ -71,6 +80,12 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) == true);
 
+        metricsMenu.gameObject.SetActive(false);
+        surveyMenu.gameObject.SetActive(true);
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) == true);
+
+        AirtableManager.Instance.PublishMetrics(MetricManager.Instance.GetDistanceTravelled(), MetricManager.Instance.GetAvgLegAngle(), MetricManager.Instance.GetMaxLegAngle(), MetricManager.Instance.GetRaises(), runtime, surveyMenu.GetPainValue(), surveyMenu.GetComfortValue(), surveyMenu.GetHelpfulValue());
 
 
     }
