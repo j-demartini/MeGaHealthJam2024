@@ -233,10 +233,6 @@ MonoBehaviour:
   includeSunInBaking:
     m_OverrideState: 1
     m_Value: 0
-  m_SkyVersion: 2
-  m_ObsoleteEarthPreset:
-    m_OverrideState: 1
-    m_Value: 1
   type:
     m_OverrideState: 1
     m_Value: 1
@@ -331,6 +327,10 @@ MonoBehaviour:
   numberOfBounces:
     m_OverrideState: 1
     m_Value: 3
+  m_SkyVersion: 2
+  m_ObsoleteEarthPreset:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &4407960372927680957
 MonoBehaviour:
   m_ObjectHideFlags: 3
