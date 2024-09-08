@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int HitPoints { get; private set; }
+    public bool ShouldPitch { get => shouldPitch; }
 
     [Header("Enemy Stats")]
     [SerializeField] private int maxHitPoints = 2;
@@ -42,7 +43,7 @@ public class Enemy : MonoBehaviour
     {
         Vector3 playerDir = isDying ? new Vector3(Player.Instance.transform.position.x, Player.Instance.transform.position.y - 500f, Player.Instance.transform.position.z) - transform.position : (Player.Instance.transform.position - transform.position).normalized;
         transform.position += transform.forward * speed * /*EnemyManager.Instance.Waves[EnemyManager.Instance.CurrentWave].DifficultyMultiplier * */Time.deltaTime;
-        transform.forward = Vector3.Lerp(transform.forward, shouldPitch ? playerDir : Vector3.ProjectOnPlane(playerDir, Vector3.up), trackingSpeed * /*EnemyManager.Instance.Waves[EnemyManager.Instance.CurrentWave].DifficultyMultiplier * */Time.deltaTime);
+        transform.forward = Vector3.Lerp(transform.forward, shouldPitch || isDying ? playerDir : Vector3.ProjectOnPlane(playerDir, Vector3.up), trackingSpeed * /*EnemyManager.Instance.Waves[EnemyManager.Instance.CurrentWave].DifficultyMultiplier * */Time.deltaTime);
 
         //float angle = Vector3.SignedAngle(transform.forward, playerDir, Vector3.up);
         //transform.Rotate(transform.forward, rollSpeed * Mathf.Sign(angle) * Time.deltaTime);
