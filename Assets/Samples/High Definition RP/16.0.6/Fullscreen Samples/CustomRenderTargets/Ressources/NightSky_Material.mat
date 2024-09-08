@@ -8,7 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NightSky_Material
-  m_Shader: {fileID: -6465566751694194690, guid: 787d182fddbfd5243ac6c8b064b0c6fa, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 787d182fddbfd5243ac6c8b064b0c6fa,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -28,6 +29,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_8f9565828be5448bbaa621d559469596_Texture_1:
+        m_Texture: {fileID: 2800000, guid: a072d0c3758cc9c47990d3e7ce43f12f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_8f9565828be5448bbaa621d559469596_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: a072d0c3758cc9c47990d3e7ce43f12f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -55,6 +60,8 @@ Material:
     - _Color: {r: 1, g: 0.23137257, b: 0, a: 0}
     - _Horizon_Color: {r: 0.24691468, g: 0.25727597, b: 0.38679248, a: 1}
     - _Moon_Tint: {r: 0.79011106, g: 0.75157225, b: 1, a: 0}
-    - _Moonlight_Forward_Direction: {r: 0.4015966, g: -0.42520103, b: -0.81112546, a: 0}
+    - _Moonlight_Forward_Direction: {r: 0.4015966, g: -0.42520103, b: -0.81112546,
+        a: 0}
     - _Zenith_Color: {r: 0.04004982, g: 0.056373566, b: 0.25471696, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

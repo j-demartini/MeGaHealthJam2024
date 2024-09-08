@@ -83,20 +83,24 @@ public class HardwareManager : MonoBehaviour
         {
             //Debug.Log("Parsing data.");
             string message = data.Dequeue();
-            string[] packet = message.Split(',');
-            int id = int.Parse(packet[0]);
-            float gyroX = float.Parse(packet[1]);
-            float gyroY = float.Parse(packet[2]);
-            float gyroZ = float.Parse(packet[3]);
-
-            if (!hardwareObjects.ContainsKey(id))
+            if(message != null)
             {
-                Hardware hardware = Instantiate(hardwarePrefab, hardwareParent).GetComponent<Hardware>();
-                hardware.Init(id);
-                hardwareObjects[id] = hardware;
+                string[] packet = message.Split(',');
+                int id = int.Parse(packet[0]);
+                float gyroX = float.Parse(packet[1]);
+                float gyroY = float.Parse(packet[2]);
+                float gyroZ = float.Parse(packet[3]);
+
+                if (!hardwareObjects.ContainsKey(id))
+                {
+                    Hardware hardware = Instantiate(hardwarePrefab, hardwareParent).GetComponent<Hardware>();
+                    hardware.Init(id);
+                    hardwareObjects[id] = hardware;
+                }
+
+                hardwareObjects[id].ReceiveGyro(gyroX, gyroY, gyroZ);
             }
 
-            hardwareObjects[id].ReceiveGyro(gyroX, gyroY, gyroZ);
         }
     }
 

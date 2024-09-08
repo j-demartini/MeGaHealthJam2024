@@ -8,7 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EdgeDetection Material
-  m_Shader: {fileID: -6465566751694194690, guid: 95dd06cf35a06c743892a4d1d5882c94, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 95dd06cf35a06c743892a4d1d5882c94,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -38,19 +39,19 @@ Material:
     m_Ints: []
     m_Floats:
     - _Background_Opacity: 0
-    - _Depth_Detection_Fade_Value: 0.01
+    - _Depth_Detection_Fade_Value: 0
     - _Depth_Detection_Step_Value: 0.01
     - _Depth_Sensitivity: 1.62
     - _Distance_Edge_SIze_Multiplier: 1
     - _Edge_Distance_Decrease: 10
-    - _Edge_Opacity: 1
-    - _Edge_Size: 1
+    - _Edge_Opacity: 1.26
+    - _Edge_Size: 1.33
     - _Fade_Value: 0.266
     - _Float: 0.01
     - _Float_1: 0.1
     - _Normal_Detec: 0
-    - _Normal_Detection_Fade_Value: 0.5
-    - _Normal_Detection_Step_value: 0.2
+    - _Normal_Detection_Fade_Value: 0.009
+    - _Normal_Detection_Step_value: 0.527
     - _RAINBOW_MODE: 0
     - _StepNormal: 0.1
     - _Step_Depth_Detection: 0.195
@@ -62,5 +63,6 @@ Material:
     - _stepDepth: 0.127
     m_Colors:
     - _Background_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Edge_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Edge_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
