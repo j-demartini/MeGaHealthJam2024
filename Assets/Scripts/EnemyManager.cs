@@ -19,8 +19,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private EnemyWave[] waves;
     [SerializeField] private Transform enemyParent;
     [Space]
-    [SerializeField] private int maxHorizontalSpawnRadius = 100;
-    [SerializeField] private int maxVerticalSpawnRadius = 50;
+    [SerializeField] private int maxHorizontalSpawnRadius = 500;
+    [SerializeField] private int maxVerticalSpawnRadius = 100;
 
     private List<Enemy> spawnedEnemies = new List<Enemy>();
 

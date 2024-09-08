@@ -20,6 +20,8 @@ public class HardwareManager : MonoBehaviour
 
     public static HardwareManager Instance { get; private set; }
 
+    public bool IsDebugging { get => debug; }
+
     [HideInInspector]
     public UnityEvent<Hardware> TrackerConnected;
     [HideInInspector]
@@ -32,6 +34,8 @@ public class HardwareManager : MonoBehaviour
     [SerializeField] private Dictionary<int, Hardware> hardwareObjects = new Dictionary<int, Hardware>();
     [SerializeField] private GameObject hardwarePrefab;
     [SerializeField] private Transform hardwareParent;
+    [Space]
+    [SerializeField] private bool debug = false;
 
     private Socket socket;
     private Queue<string> data = new Queue<string>();
@@ -53,6 +57,15 @@ public class HardwareManager : MonoBehaviour
             hardwareObjects.Remove(hardware.ID);
         });
 
+        if (debug)
+        {
+            for (int i = 0; i < hardwareParent.childCount; i++)
+            {
+                Hardware hardware = hardwareParent.GetChild(i).GetComponent<Hardware>();
+                hardwareObjects.Add(i, hardware);
+                hardware.Init(i);
+            }
+        }
     }
 
     void OnDisable()
@@ -70,7 +83,6 @@ public class HardwareManager : MonoBehaviour
         {
             //Debug.Log("Parsing data.");
             string message = data.Dequeue();
-            Debug.Log(message);
             string[] packet = message.Split(',');
             int id = int.Parse(packet[0]);
             float gyroX = float.Parse(packet[1]);

@@ -34,7 +34,7 @@ public class Hardware : MonoBehaviour
 
     void Update()
     {
-        if (Time.realtimeSinceStartup - lastCommTime > hardwareTimeout)
+        if (Time.realtimeSinceStartup - lastCommTime > hardwareTimeout && !HardwareManager.Instance.IsDebugging)
         {
             HardwareManager.Instance.TrackerDisconnected.Invoke(this);
             Destroy(this.gameObject);
