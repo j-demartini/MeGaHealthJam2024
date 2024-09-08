@@ -2986,7 +2986,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: e91a4dcfba1058349817c6e6f92eb0bd, type: 2}
   m_TargetDisplay: 0
@@ -12660,7 +12660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223267355}
   - component: {fileID: 1223267356}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15786,7 +15786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1553360711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19826,7 +19826,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 2
+  antialiasing: 1
   SMAAQuality: 2
   dithering: 1
   stopNaNs: 0
