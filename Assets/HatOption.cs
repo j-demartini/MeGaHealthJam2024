@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HatOption : MonoBehaviour
 {
-    [SerializeField] private int hatIndex;
 
-    public void OnSelect()
+    private Image border;
+
+    void Awake()
     {
+        border = GetComponent<Image>();
+    }
 
+    public void SetSelected(bool b)
+    {
+        border.color = b ? Color.yellow : Color.white;
     }
 
 }
