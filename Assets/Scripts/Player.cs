@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
             else
             {
                 transform.Rotate(Vector3.up, yawSpeed * Mathf.Sign(leftDir.y) * ((Mathf.Abs(leftDir.y) + Mathf.Abs(rightDir.y)) / 2) * Time.deltaTime);
-                transform.Rotate(transform.forward, rollSpeed * Mathf.Sign(-leftDir.y) * ((Mathf.Abs(leftDir.y) + Mathf.Abs(rightDir.y)) / 2) * Time.deltaTime);
+                transform.Rotate(Vector3.forward, rollSpeed * Mathf.Sign(-leftDir.y) * ((Mathf.Abs(leftDir.y) + Mathf.Abs(rightDir.y)) / 2) * Time.deltaTime);
             }
         }
     }

@@ -9624,7 +9624,7 @@ MonoBehaviour:
   - {fileID: 1326279200}
   enemyParent: {fileID: 755625363}
   nextWaveEnemyPercentage: 0.25
-  maxHorizontalSpawnRadius: 500
+  maxHorizontalSpawnRadius: 200
   maxVerticalSpawnRadius: 100
   verticalSpawnOffset: 750
   minSpawnDistToPlayer: 100
