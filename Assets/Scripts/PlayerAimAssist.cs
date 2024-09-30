@@ -12,7 +12,7 @@ public class PlayerAimAssist : MonoBehaviour
         {
             if (CurrentTarget == null)
             {
-                if (!other.gameObject.GetComponent<Enemy>().isDying)
+                if (!other.gameObject.GetComponentInParent<Enemy>().isDying)
                     CurrentTarget = other.gameObject;
             }
         }

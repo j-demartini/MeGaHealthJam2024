@@ -77,7 +77,7 @@ public class EnemyManager : MonoBehaviour
 
             if (type == EnemyType.Blimp)
             {
-                enemy.GetComponent<Enemy>().explosionSize = 25f;
+                enemy.GetComponentInParent<Enemy>().explosionSize = 25f;
             }
         }
 
@@ -95,10 +95,10 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        if (debug)
-        {
-            StartNewWave();
-        }
+        // if (debug)
+        // {
+        //     StartNewWave();
+        // }
     }
 
     // Update is called once per frame

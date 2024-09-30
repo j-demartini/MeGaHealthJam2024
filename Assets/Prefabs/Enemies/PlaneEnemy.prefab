@@ -588,6 +588,8 @@ MonoBehaviour:
   fireRate: 0.5
   fireRadius: 15
   fireSource: {fileID: 2382257914417687912}
+  isDying: 0
+  explosionSize: 12.5
 --- !u!54 &6374009324163830840
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -628,7 +630,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e5df3868babcb4af7938eab568575e17, type: 3}
   m_Resource: {fileID: 8300000, guid: e5df3868babcb4af7938eab568575e17, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.119
   m_Pitch: 1
   Loop: 1
   Mute: 0

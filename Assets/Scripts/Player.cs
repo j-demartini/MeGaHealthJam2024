@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
     {
         if (aimAssist.CurrentTarget != null)
         {
-            if (aimAssist.CurrentTarget.GetComponent<Enemy>().isDying)
+            if (aimAssist.CurrentTarget.GetComponentInParent<Enemy>().isDying)
             {
                 return;
             }
@@ -175,8 +175,8 @@ public class Player : MonoBehaviour
         }
 
 
-        cooldown += Time.deltaTime * (autoFire ? 1f : HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude);
-        if ((autoFire || HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].Direction.magnitude > noiseThreshold) && cooldown >= fireRate)
+        cooldown += Time.deltaTime * (autoFire ? 1f : HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].GetSumValue());
+        if ((autoFire || HardwareManager.Instance.HardwareObjects[(int)Sensor.Leg].GetSumValue() > noiseThreshold) && cooldown >= fireRate)
         {
             cooldown = 0f;
             int gun = Random.Range(0, bulletSpawnLocs.Length);

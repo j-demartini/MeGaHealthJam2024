@@ -88,7 +88,6 @@ public class MetricManager : MonoBehaviour
             }
         }
 
-        Debug.Log(GetDistanceTravelled());
 
     }
 

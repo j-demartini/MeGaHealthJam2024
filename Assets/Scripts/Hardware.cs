@@ -23,7 +23,7 @@ public class Hardware : MonoBehaviour
     private float lastCommTime;
 
 
-    private float hardwareTimeout = 20f;
+    private float hardwareTimeout = 2000f;
 
     public void Init(int id)
     {
